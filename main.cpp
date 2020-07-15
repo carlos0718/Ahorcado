@@ -15,7 +15,7 @@ using namespace std;
 int main()
 {
     setlocale(LC_ALL,"spanish");
-
+    system("color 9F");
    Juego x;
    x.iniciarJuego();
    Palabra p;

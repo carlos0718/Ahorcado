@@ -23,7 +23,7 @@ void puntajeTotal(int a)
     {
         if(a==i)
         {
-            gotoxy(20,4);
+            gotoxy(4,20);
             cout<<"PUNTAJE TOTAL:  "<< a * 50 << " pts"<<endl;
             return;
         }
@@ -40,7 +40,6 @@ void puntajeTotal(int a)
 int cantidadParticipantes()
 {
     int c;
-    cout<<"INGRESE LA CANTIDAD DE PARTICIPANTES: ";
     cin>>c;
      if(c<2 || c>4)
     {

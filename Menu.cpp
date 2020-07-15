@@ -143,7 +143,7 @@ void menuCategorias(int &a)
         system("cls");
     }
 }
-/*void menuCategorias_2()
+void menuCategorias_2(int &a, int tam)
 {
     Palabra p;
     ocultarCursor();
@@ -151,7 +151,6 @@ void menuCategorias(int &a)
     char opciones[][20] = {" Paises "," Ciudades ", " Colores "," Animales "," Frutas  y Verduras", " Electrodomésticos ", " Peliculas y Series", " Salir "};
     int n= 8;///cantidad de opciones para seleccionar.
     int op;
-    int a=0;///cuenta cuantas palabras fueron adiviandas por el jugador.
     bool salir = false;
     while(!salir)
    {
@@ -168,7 +167,7 @@ void menuCategorias(int &a)
              while(i<5 )
              {
                  cout <<"\t "<< i +1<<"° "<<" PALBARA"<<endl;
-                 if(p.leerPalabraDeDisco(op))
+                 if(p.leerPalabraDeDisco_2(op, tam))
                     a++;
                  system("cls");
                  i++;
@@ -177,7 +176,7 @@ void menuCategorias(int &a)
          }
         system("cls");
     }
-}*/
+}
 void gotoxy(int x, int y)
 {
    HANDLE hCon;

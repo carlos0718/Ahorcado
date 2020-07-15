@@ -14,16 +14,19 @@ class Palabra
 
         void ingresarPalabra();
         void guardarPalabraEnDisco();
+
         bool leerPalabraDeDisco(int);
         bool mostrarPalabraAlHazar(int, Palabra * );
         bool contarLetras(char *);
-        bool adivinarLetra(char *,int, int);
-        void ingresarLetra(int,int, int &, int &, char *p);
+        bool adivinarLetra(char *,int);
+        void ingresarLetra(int, int &, int &, char *p);
 
-        bool leerPalabraDeDisco_2(int);
-        bool mostrarPalabraAlHazar_2(int, Palabra * );
-        bool contarLetras_2(char *);
+
+        bool leerPalabraDeDisco_2(int, int);
+        bool mostrarPalabraAlHazar_2(int, Palabra *, int );
+        bool contarLetras_2(char *, int);
         bool adivinarLetra_2(char *,int, int);
+        void ingresarLetra_2(int, int &, int &, char *p, int);
 
         void setPalabra(const char *pal) { strcpy(palabra,pal);}
         char *getPalabra(){ return palabra; }

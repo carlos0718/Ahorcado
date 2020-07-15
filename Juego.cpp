@@ -25,7 +25,8 @@ void Juego::iniciarJuego()
     system("cls");
     cout<<"\t   Selecciona la categoria para empezar a jugar"<<endl;
     menuCategorias(a);
-    g.setPuntaje(a*50);
+    int r= a*50;
+    g.setPuntaje(r);
     g.guardarNombreYPuntajeEnDisco();
 
  }
@@ -33,21 +34,20 @@ void Juego::iniciarJuego()
 void Juego::iniciarMultijugador()
 {
     Jugador *g;
-    Palabra p;
     int tam;
     int a=0;
+    cout<<"INGRESE LA CANTIDAD DE PARTICIPANTES: ";
     tam=cantidadParticipantes();
     setCantidad(tam);
-
-    tam = getCantidad();
+    //tam = getCantidad();
     g=new Jugador[tam];
     if(g==NULL) return;
     ingresarParticipantes(g, tam);
     mostrarParticipantes(g,tam);
-    cout<<"\t   El  primer jugador selecciona la categoria para empezar a jugar"<<endl;
+    cout<<"\n\t   El  primer jugador selecciona la categoria para empezar a jugar"<<endl;
     cin.ignore();
     system("cls");
-    menuCategorias(a);
+    menuCategorias_2(a,tam);
 
 
 

@@ -29,14 +29,14 @@ bool Jugador::validarNombre(char *n, int tam)
     cout<<"\t NOMBRE : ";
     cin.getline(n,20);
     int tam=strlen(n);
-    cout<<tam<<endl;
+    //cout<<tam<<endl;
 
     while(validarNombre(n,tam))
     {
         system("cls");
         cout<<"\t NOMBRE : ";
         cin.getline(n,20);
-        tam=strlen(n);
+        //tam=strlen(n);
     }
     setNombre(n);
     setPuntaje(0);
@@ -64,20 +64,16 @@ void Jugador::leerNombreYPuntajeDeDisco()
     {
           cout<<"Error: Archivo no existe"<<endl;
           return;
-     }
-
-    while(fread(this,sizeof(Jugador),1,p))
-    {
-        cout<<"\t\t   R A N K I N G "<<endl;
-        mostrarNombreYPuntaje();
     }
+    cout<<"\t\t   R A N K I N G "<<endl;
+    while(fread(this,sizeof(Jugador),1,p))
+        mostrarNombreYPuntaje();
     fclose(p);
     return;
 }
 
 void Jugador::mostrarNombreYPuntaje()
 {
-    cout<<"\t\t R A N K I N G"<<endl;
     cout<<"\n\t"<<"  "<<getNombre()<<"\t\t "<<getPunatje()<<endl;
 }
 void Jugador::mostrarNombre()

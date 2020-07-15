@@ -17,6 +17,6 @@ void ocultarCursor();
 
 void menuCategorias(int &);
 
-void menuCategorias_2();
+void menuCategorias_2(int &, int);
 
 #endif // MENU_H_INCLUDED

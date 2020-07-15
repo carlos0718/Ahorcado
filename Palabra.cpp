@@ -8,6 +8,7 @@ const char *PALABRA = "PALABRA.dat";
 
 
 #include "Palabra.h"
+int cantidadParticipantes();
 
 using namespace std;
 
@@ -99,7 +100,6 @@ bool Palabra::mostrarPalabraAlHazar(int tam, Palabra *aux)
 bool Palabra::contarLetras(char *p)
 {
     int tam=strlen(p);
-    int tse;//tamaño sin espacio
     int n=0;
     cout<<endl;
     //cout<<p<<endl;
@@ -116,42 +116,90 @@ bool Palabra::contarLetras(char *p)
         }
         i++;
     }
-    tse=tam-n;
     //cout<<tse<<endl;
-    if(adivinarLetra(p,tam,tse))
+    if(adivinarLetra(p,tam))
         return true;
     return false;
 }
 
-bool Palabra::adivinarLetra(char *p, int tam,int tse)
+bool Palabra::adivinarLetra(char *p, int tam)
 {
     int c = CANTIDAD_VIDAS;
-    int i=0, x=0, ban2=0;
+    int i=0;
     gotoxy(10,10);cout<<"letras erradas: ";
     //cout<<tam;
-    ingresarLetra(tam,tse, c,i, p);
+    ingresarLetra(tam, c,i, p);
 
     if(i==tam)
     {
-        //ban2=1;///esta bandera indica que al menos adivinó una palabra aunque halla terminado con todas sus vidas.
         gotoxy(9,12);
         cout<<" FELICITACIONES ! ! ! "<<endl;
-        //x++;///solo para verificar las 5 veces de la función palabra y para usarlo en la funcion de puntajeTatal
         cin.get();
         cin.ignore();
         return true;
     }
-    if(c >= 0 )//&& ban2 == 0 )
+    if(c >= 0 )
     {
         gotoxy(9,12);
         cout<<" PERDISTE ! ! ! "<<endl;
         cin.get();
         cin.ignore();
-        x++;
         return false;
     }
+}///Esta funcion se encarga de llevar la cuenta de las vidas y de las letras acertadas.
+///Al tener que usar la variable de vidas "c" y la de letras " i ", y seguir usandolas fuera de esat funcion
+///es por ello que se pasan las variables por referencia.
+void Palabra::ingresarLetra(int tam, int &c,int &i, char *p)
+{
+    char letra;
+    int m=0;
+    for(int j=0;j<tam;j++)
+    {
+        if(p[j]==' ')
+            i++;
+    }
+    //iteracion de la cantidad de oportunidad que tiene cada jugador o hasta completar la palabra.
+    while(c>0 && i<tam)
+    {
+        //va imprimiendo en tiempo real la cantidad de vidas que le va quedando en cada palabra.
+        gotoxy(25,4);cout<<" VIDAS : "<< c;
+
+        gotoxy(3,3);cout<<"-> ";
+        cin>>letra;
+
+        //TOLOWER para convertir cada letra a minisculas, y no sea key sensitive.
+        letra=tolower(letra);
+        gotoxy(5,3);cout<<"  ";
+
+        //esta bandera se pone en cero por cada pedido de letra que se hace
+        //si llega al final en cero es por que letra no existe en el palabra.
+        int ban=0;
+
+        //recorre la palabra para comparar con la letra ingresada e imprimre las veces que existe esa letra.
+        for(int j=0; j<tam; j++)
+        {
+            if(letra==p[j])
+            {
+                gotoxy(8+(j*2),6);
+                cout<<p[j];
+                ban++;
+                i++;
+            }
+        }
+        //acá se imprime cada letra errada
+        if(ban==0)
+        {
+            gotoxy(25+(m*2),10);
+            cout<<letra;
+            c--;
+            m++;
+        }
+    }
 }
-bool Palabra::leerPalabraDeDisco_2(int id)
+
+//FUNCIONES PARA OPCION MULTIJUGADOR
+
+bool Palabra::leerPalabraDeDisco_2(int id, int cantidad_jugadores)
 {
     Palabra aux[300];
     int tam;
@@ -172,7 +220,7 @@ bool Palabra::leerPalabraDeDisco_2(int id)
     tam=cont;
     //for(int j=0;j<tam;j++)
         //cout<<"palabra: "<<aux[j].getPalabra()<<endl;
-    if(mostrarPalabraAlHazar_2(tam,aux))
+    if(mostrarPalabraAlHazar_2(tam,aux, cantidad_jugadores))
     {
         fclose(p);
         return true;
@@ -180,7 +228,7 @@ bool Palabra::leerPalabraDeDisco_2(int id)
     fclose(p);
     return true;
 }
-bool Palabra::mostrarPalabraAlHazar_2(int tam, Palabra *aux)
+bool Palabra::mostrarPalabraAlHazar_2(int tam, Palabra *aux, int cantidad_jugadores)
 {
     int j;
     int vec[tam];
@@ -196,15 +244,14 @@ bool Palabra::mostrarPalabraAlHazar_2(int tam, Palabra *aux)
         cout<<endl;
         //cout<<aux[vec[i]].getPalabra();
         cout<<endl;
-        if(contarLetras_2(aux[vec[i]].getPalabra()))
+        if(contarLetras_2(aux[vec[i]].getPalabra(),cantidad_jugadores))
             return true;
         return false;
     }
 }
-bool Palabra::contarLetras_2(char *p)
+bool Palabra::contarLetras_2(char *p, int cantidad_jugadores)
 {
     int tam=strlen(p);
-    int tse;//tamaño sin espacio
     int n=0;
     cout<<endl;
     //cout<<p<<endl;
@@ -221,75 +268,125 @@ bool Palabra::contarLetras_2(char *p)
         }
         i++;
     }
-    tse=tam-n;//no va
-    //cout<<tse<<endl;
-    if(adivinarLetra_2(p,tam,tse))
+
+    if(adivinarLetra_2(p,tam,cantidad_jugadores))
         return true;
     return false;
 }
 
-bool Palabra::adivinarLetra_2(char *p, int tam,int tse)
+bool Palabra::adivinarLetra_2(char *p, int tam, int cantidad_jugadores)
 {
+    //" c" es la cantidad de vidas que se pasa por referencia en la funcio
+    // ingresarLetras()
     int c = CANTIDAD_VIDAS;
-    int i=0, x=0, ban2=0;
+
+    // " i " es el contador de letras que se pasa por referencia en la funcion
+    // ingresarLetra();
+    int i=0;
+
+    //en esta posición se imprime las letras erradas
     gotoxy(10,10);cout<<"letras erradas: ";
     //cout<<tam;
-    ingresarLetra(tam,tse,c, i,p);
+
+    ingresarLetra_2(tam,c, i,p,cantidad_jugadores);
+
+    //esta condicion es validad siempre y cuando la cantidad de letras acertadas
+    //es igual al tamaño de la palabra y no haya acabado sus vidas
+    // y retorna TRUE para que sea contada como palabra adivinada.
     if(i==tam )
     {
-        //ban2=1;///esta bandera indica que al menos adivinó una palabra aunque halla terminado con todas sus vidas.
         gotoxy(9,12);
         cout<<" FELICITACIONES ! ! ! "<<endl;
-        //x++;///solo para verificar las 5 veces de la función palabra y para usarlo en la funcion de puntajeTatal
         cin.get();
         cin.ignore();
         return true;
     }
-    if(c >= 0 )//&& ban2 == 0 )
+    //esta codicion es verdadera siempre y cuando la cantidad de vidas es cero y
+    //no haya completado la palabra.
+    //retorna FALSE para que no sea contada la palabra al momento del puntaje.
+    if(c == 0 )
     {
         gotoxy(9,12);
         cout<<" PERDISTE ! ! ! "<<endl;
         cin.get();
         cin.ignore();
-        x++;
         return false;
     }
 }
-void Palabra::ingresarLetra(int tam,int tse, int &c,int &i, char *p)
+void Palabra::ingresarLetra_2(int tam, int &c,int &i, char *p,int cantidad_jugadores)
 {
     char letra;
     int m=0;
+    int *vec;
+    vec =new int[cantidad_jugadores];
+    int jugador=1;
     for(int j=0;j<tam;j++)
     {
         if(p[j]==' ')
             i++;
     }
-    while(c>0 && i<tam)//iteracion de la cantidad de oportunidad que tiene cada jugador o hasta completar la palabra.
+    for(int j=0;j<cantidad_jugadores;j++)
+        vec[j]=c;
+
+    for(int j=0; j<cantidad_jugadores; j++)
     {
-        //char corazon;
-        gotoxy(25,4);cout<<" VIDAS : "<< c;
-        gotoxy(3,3);cout<<"-> ";
-        cin>>letra;
-        //TOLOWER para convertir cada letra a minisculas, y no sea key sensitive.
-        letra=tolower(letra);
-        gotoxy(5,3);cout<<"  ";
-        int ban=0;
-        for(int j=0; j<tam; j++) //recorre la palabra para comparar con la letra ingresada e imprimre las veces que existe esa letra.
+        gotoxy(13+(j*20),4);
+        cout<<" VIDAS J"<<j +1<<": "<< vec[j];
+    }
+    gotoxy(25,13);cout<<" TURNO DEL JUGADOR "<<jugador;
+    //iteracion de la cantidad de oportunidad que tiene cada jugador o hasta completar la palabra.
+    while( i<tam)
+    {
+        while(vec[jugador -1]>0)
         {
-            if(letra==p[j])
+            gotoxy(3,3);
+            cout<<"-> ";
+            cin>>letra;
+
+            //TOLOWER para convertir cada letra a minisculas, y no sea key sensitive.
+            letra=tolower(letra);
+            gotoxy(5,3);
+            cout<<"  ";
+
+            //esta bandera se pone en cero por cada pedido de letra que se hace
+            //si llega al final en cero es por que letra no existe en el palabra.
+            int ban=0;
+
+            //recorre la palabra para comparar con la letra ingresada e imprimre las veces que existe esa letra.
+            for(int j=0; j<tam; j++)
             {
-                gotoxy(8+(j*2),6);
-                cout<<p[j];
-                ban++;
-                i++;
+                if(letra==p[j])
+                {
+                    gotoxy(8+(j*2),6);
+                    cout<<p[j];
+                    ban++;
+                    i++;
+                }
+            }
+            //acá se imprime cada letra errada
+            if(ban==0)
+            {
+                vec[jugador-1]=c--;
+                //va imprimiendo en tiempo real la cantidad de vidas que le va quedando en cada palabra.
+                for(int j=0; j<cantidad_jugadores; j++)
+                {
+                    gotoxy(13+(j*20),4);
+                    cout<<" VIDAS J"<<j+1<<": "<< vec[j];
+                }
+                if(jugador==cantidad_jugadores)
+                {
+                    gotoxy(25,13);cout<<" TURNO DEL JUGADOR "<<jugador;
+                }
+                else
+                {
+                    jugador =jugador+1;
+                    gotoxy(25,13);cout<<" TURNO DEL JUGADOR "<<jugador;
+                }
+                gotoxy(25+(m*2),10);
+                cout<<letra;
+                m++;//variable para aumentar la separacion entre letras.
             }
         }
-        if(ban==0)//acá se imprime cada letra errada
-        {
-            gotoxy(25+(m*2),10);
-            cout<<letra;
-            c--;
-            m++;
-        }
     }
+    delete(vec);
 }
