@@ -1,0 +1,87 @@
+# depslib dependency file v1.0
+1594775446 source:c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\funciones.cpp
+	<iostream>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<ctime>
+	"Jugador.h"
+	"Juego.h"
+	"Funciones.h"
+	"NombresAux.h"
+
+1594775673 c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\jugador.h
+
+1594775446 c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\funciones.h
+
+1594775643 source:c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\juego.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+	"Jugador.h"
+	"Menu.h"
+	"Juego.h"
+	"Funciones.h"
+	"Palabra.h"
+
+1593531705 c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\juego.h
+
+1594775673 source:c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\jugador.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+	<ctime>
+	"Jugador.h"
+	"Funciones.h"
+
+1594772577 source:c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\menu.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+	<conio.h>
+	<windows.h>
+	"Menu.h"
+	"Juego.h"
+	"Palabra.h"
+
+1594774011 c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\menu.h
+
+1594776220 source:c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\palabra.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+	<ctime>
+	"Palabra.h"
+
+1594670551 source:c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\main.cpp
+	<iostream>
+	<cstdlib>
+	<clocale>
+	<cstring>
+	"Juego.h"
+	"Jugador.h"
+	"Funciones.h"
+	"Menu.h"
+	"Palabra.h"
+	"Categoria.h"
+
+1594760848 c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\palabra.h
+
+1593520000 source:c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\categoria.cpp
+	<iostream>
+	<cstdio>
+	<cstring>
+	"Categoria.h"
+
+1593288791 c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\categoria.h
+
+1594737784 c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\nombresaux.h
+
+1594737834 source:c:\users\carlos alfredo jesus\desktop\tussi-utn\2do.año\laboratorio ii\2020\la horca\nombresaux.cpp
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	<ctime>
+	"NombresAux.h"
+
