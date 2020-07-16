@@ -74,7 +74,7 @@ void Jugador::leerNombreYPuntajeDeDisco()
 
 void Jugador::mostrarNombreYPuntaje()
 {
-    cout<<"\n\t"<<"  "<<getNombre()<<"\t\t "<<getPunatje()<<endl;
+    cout<<"\n\t"<<"  "<<getNombre()<<" : "<<getPunatje()<<endl;
 }
 void Jugador::mostrarNombre()
 {

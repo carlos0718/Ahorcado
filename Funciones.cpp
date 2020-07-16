@@ -23,14 +23,14 @@ void puntajeTotal(int a)
     {
         if(a==i)
         {
-            gotoxy(4,20);
+            gotoxy(15,7);
             cout<<"PUNTAJE TOTAL:  "<< a * 50 << " pts"<<endl;
             return;
         }
     }
     if(a==5)
     {
-         gotoxy(4,20);
+         gotoxy(15,7);
         /*PUNTAJE DE 300 AL QUE ADIVINA SIN ERRAR NI UNA LETRA EN TODA LA RONDA*/
         cout<<"PUNTAJE TOTAL:  "<< PUNTOS_TOTALES + 50<<endl;
         return;

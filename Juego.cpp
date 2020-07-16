@@ -18,6 +18,8 @@ void Juego::iniciarJuego()
  {
     Jugador g;
     int a =0;///cuenta cuantas palabras fueron adiviandas por el jugador.
+    cout<<"\n\t ADIVINA LAS 5 PALABRAS DE ESTA RONDA PARA ALCANZAR EL PUNTAJE MÁXIMO DE 300 ptos "<<endl;
+    cout<<"\t\t\tPONE A PRUEBA TUS CONOCIMIENTOS ! ! !  "<<endl;
     g.ingresarNombre();
     system("cls");
     g.mostrarNombre();
