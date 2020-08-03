@@ -332,22 +332,30 @@ bool Palabra::adivinarLetra_2(char *p, int tam, int cantidad_jugadores)
 void Palabra::ingresarLetra_2(int tam, int &c,int &i, char *p,int cantidad_jugadores)
 {
     char letra;
-    int m=0,pos=0, cont=0;
-    char aux[tam];
+    int m=0,pos=0,cont =0;
+    char aux[tam];// "tam" es la cantida  de letras de la palabra
     for(int j=0;j<tam;j++)
         aux[j]=' ';
 
     int *vec;
     vec =new int[cantidad_jugadores];
     int jugador=1;
+    // iteracion que pone la cadena en blanco, para evitar basura.
     for(int j=0;j<tam;j++)
     {
         if(p[j]==' ')
             i++;
     }
+    //guarda la cantidad de vidas de los jugadores
     for(int j=0;j<cantidad_jugadores;j++)
+        // "C" indica la cantidad de vidas.
         vec[j]=c;
-
+    int n1=0,n2=0,n3=0,n4=0;
+    n1=c;
+    n2=c;
+    n3=c;
+    n4=c;
+    // contadores de vida para cada jugador
     for(int j=0; j<cantidad_jugadores; j++)
     {
         gotoxy(13+(j*20),4);
@@ -358,6 +366,7 @@ void Palabra::ingresarLetra_2(int tam, int &c,int &i, char *p,int cantidad_jugad
     //iteracion de la cantidad de oportunidad que tiene cada jugador o hasta completar la palabra.
     while( i<tam)
     {
+        //itera mientras la vida del jugador es mayor a cero
         while(vec[jugador -1]>0)
         {
             bool existe=false;
@@ -395,20 +404,42 @@ void Palabra::ingresarLetra_2(int tam, int &c,int &i, char *p,int cantidad_jugad
             //acá se imprime cada letra errada
             if(ban==0&&existe==false)
             {
-                vec[jugador-1]=c--;
-                //va imprimiendo en tiempo real la cantidad de vidas que le va quedando en cada palabra.
-                /*for(int j=0; j<cantidad_jugadores; j++)
+                int op=jugador;
+                // para descontar vidas a cada  jugador
+                switch(op)
                 {
-                    gotoxy(13+(j*20),4);
-                    cout<<" VIDAS J"<<j+1<<": "<< vec[j];
-                }*/
+                    case 1:
+                    {
+                        n1-=1;
+                        vec[jugador-1]=n1;
+                    }break;
+                    case 2:
+                    {
+                        n2-=1;
+                        vec[jugador-1]=n2;
+                    }break;
+                    case 3:
+                    {
+                        n3-=1;
+                        vec[jugador-1]=n3;
+                    }break;
+                    case 4:
+                    {
+                        n4-=1;
+                        vec[jugador-1]=n4;
+                    }break;
+                }
+
+                //va imprimiendo en tiempo real la cantidad de vidas que le va quedando en cada palabra.
                 int j=jugador-1;
                 gotoxy(13+(j*20),4);
                 cout<<" VIDAS J"<<jugador<<": "<< vec[jugador-1];
+
                 if(jugador==cantidad_jugadores)
                 {
                     jugador=jugador - cont;
                     gotoxy(25,13);cout<<" TURNO DEL JUGADOR "<<jugador;
+                    cont=0;
                 }
                 else
                 {
